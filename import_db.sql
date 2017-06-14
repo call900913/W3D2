@@ -54,6 +54,35 @@ CREATE TABLE question_follows (
 
 );
 
+INSERT INTO
+  question_follows (user_id, question_id)
+VALUES
+  ((SELECT id FROM users), (SELECT id FROM questions));
+
+  INSERT INTO
+    question_follows (user_id, question_id)
+  VALUES
+    (2, 3);
+
+    INSERT INTO
+      question_follows (user_id, question_id)
+    VALUES
+      (1,2);
+
+      INSERT INTO
+        question_follows (user_id, question_id)
+      VALUES
+        (2,2);
+        INSERT INTO
+          question_follows (user_id, question_id)
+        VALUES
+          (3,2);
+          INSERT INTO
+            question_follows (user_id, question_id)
+          VALUES
+            (1,3);
+
+
 DROP TABLE if exists replies;
 
 CREATE TABLE replies (

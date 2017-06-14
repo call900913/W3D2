@@ -14,9 +14,9 @@ class QuestionFollow
       FROM
         users
       JOIN question_follows ON question_follows.user_id = users.id
-        JOIN questions ON question_follows.question_id = questions.id
-        WHERE
-          question_id = ?
+      JOIN questions ON question_follows.question_id = questions.id
+      WHERE
+        question_id = ?
     SQL
 
     user_objects = []
@@ -47,6 +47,23 @@ class QuestionFollow
     end
 
     question_objects
+  end
+
+  def self.most_followed_questions(n)
+    most_followed = QuestionsDatabase.instance.execute(<<-SQL, n)
+      SELECT
+        *
+      FROM
+        question_follows
+      GROUP BY
+        user_id
+      ORDER BY
+        Count(question_id) DESC
+      LIMIT
+        n
+    SQL
+
+    most_followed
   end
 
   def initialize(options = {})
